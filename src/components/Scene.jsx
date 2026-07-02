@@ -117,14 +117,14 @@ export default function Scene() {
       </Environment>
 
       {/* Light warm stone table + soft contact shadow */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.82, 0]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.55, 0]} receiveShadow>
         <circleGeometry args={[8, 64]} />
         <meshStandardMaterial color="#ddd1bd" roughness={0.85} metalness={0} />
       </mesh>
       <ContactShadows
-        position={[0, -1.79, 0]}
-        opacity={0.4}
-        scale={9}
+        position={[0, -1.53, 0]}
+        opacity={0.42}
+        scale={8}
         blur={2.8}
         far={4}
         resolution={1024}
@@ -153,11 +153,11 @@ export default function Scene() {
       <OrbitControls
         makeDefault
         enablePan={false}
-        minDistance={3.2}
-        maxDistance={11}
-        minPolarAngle={0.15}
-        maxPolarAngle={Math.PI / 2 + 0.15}
-        target={[0, -0.2, 0]}
+        minDistance={2.8}
+        maxDistance={10}
+        minPolarAngle={0.05}
+        maxPolarAngle={Math.PI / 2 + 0.18}
+        target={[0, -0.5, 0]}
         enableDamping
         dampingFactor={0.08}
       />
