@@ -63,13 +63,13 @@ export const SUBSTRATES = [
 // Decoration items. `kind` maps to a procedural model component.
 // Custom admin items use kind:'glb' with a `url`.
 export const DECORATIONS = [
-  { id: 'echeveria-green', name: 'Echeveria', kind: 'echeveria', variant: 'green', icon: '🪷', baseScale: 1.0 },
-  { id: 'echeveria-red', name: 'Red Echeveria', kind: 'echeveria', variant: 'red', icon: '🌺', baseScale: 1.0 },
-  { id: 'cactus', name: 'Cactus', kind: 'cactus', icon: '🌵', baseScale: 1.0 },
-  { id: 'haworthia', name: 'Haworthia', kind: 'haworthia', icon: '🌱', baseScale: 1.0 },
-  { id: 'cushion-moss', name: 'Cushion Moss', kind: 'moss', icon: '🌿', baseScale: 1.0 },
-  { id: 'fittonia-pink', name: 'Fittonia Pink', kind: 'fittonia', variant: 'pink', icon: '🌸', baseScale: 1.0 },
-  { id: 'small-fern', name: 'Small Fern', kind: 'fern', icon: '🌾', baseScale: 1.0 },
+  { id: 'echeveria-green', name: 'Echeveria', kind: 'echeveria', variant: 'green', icon: '🪷', baseScale: 1.4 },
+  { id: 'echeveria-red', name: 'Red Echeveria', kind: 'echeveria', variant: 'red', icon: '🌺', baseScale: 1.4 },
+  { id: 'cactus', name: 'Cactus', kind: 'cactus', icon: '🌵', baseScale: 1.35 },
+  { id: 'haworthia', name: 'Haworthia', kind: 'haworthia', icon: '🌱', baseScale: 1.3 },
+  { id: 'cushion-moss', name: 'Cushion Moss', kind: 'moss', icon: '🌿', baseScale: 1.2 },
+  { id: 'fittonia-pink', name: 'Fittonia Pink', kind: 'fittonia', variant: 'pink', icon: '🌸', baseScale: 1.25 },
+  { id: 'small-fern', name: 'Small Fern', kind: 'fern', icon: '🌾', baseScale: 1.25 },
   { id: 'dragon-stone', name: 'Dragon Stone', kind: 'stone', icon: '🪨', baseScale: 1.0 },
   { id: 'sea-shell', name: 'Sea Shell', kind: 'shell', icon: '🐚', baseScale: 1.0 },
 ]
