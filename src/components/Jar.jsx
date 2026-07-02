@@ -41,7 +41,7 @@ function useJarGeometry() {
 export default function Jar() {
   const geo = useJarGeometry()
   return (
-    <mesh geometry={geo} castShadow renderOrder={2}>
+    <mesh geometry={geo} castShadow renderOrder={2} raycast={() => null}>
       <MeshTransmissionMaterial
         transmission={1}
         thickness={0.55}
