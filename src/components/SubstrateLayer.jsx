@@ -104,6 +104,7 @@ export default function SubstrateLayer({ layer, isTop, mode, onPlace }) {
         geometry={discGeo}
         position={[0, topY, 0]}
         receiveShadow
+        userData={{ placeable: isTop }}
         onPointerDown={
           interactive
             ? (e) => {

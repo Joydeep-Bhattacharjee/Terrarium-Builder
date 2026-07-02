@@ -1,4 +1,4 @@
-# 🌿 Virtual Terrarium Builder
+# 🌿 EcoBloom Terra-Space
 
 A photorealistic, interactive **3D terrarium builder** in the browser. Design a
 terrarium inside a glass jar the way you would build a real one — stack soil

@@ -32,7 +32,7 @@ export default function DragonStone({ seed = 1 }) {
 
   return (
     <mesh geometry={geo} castShadow receiveShadow>
-      <meshStandardMaterial color="#5b544e" roughness={0.98} metalness={0.02} flatShading />
+      <meshStandardMaterial color="#7d6544" roughness={0.97} metalness={0.02} flatShading />
     </mesh>
   )
 }

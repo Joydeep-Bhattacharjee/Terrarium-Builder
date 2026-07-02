@@ -25,10 +25,19 @@ export const useStore = create((set, get) => ({
   adminOpen: false,
   hoverEnabled: true,
 
+  // drag-and-drop from the panel into the 3D jar
+  dragItemId: null,
+  dropRequest: null, // { ndc: [x, y], itemId }
+
   setMode: (mode) => set({ mode }),
   selectMaterial: (id) => set({ selectedMaterial: id, mode: 'build' }),
   selectItem: (id) => set({ selectedItem: id, mode: 'decorate' }),
   toggleAdmin: () => set((s) => ({ adminOpen: !s.adminOpen })),
+
+  startDrag: (id) => set({ dragItemId: id, mode: 'decorate', selectedItem: id }),
+  endDrag: () => set({ dragItemId: null }),
+  requestDrop: (ndc, itemId) => set({ dropRequest: { ndc, itemId } }),
+  clearDrop: () => set({ dropRequest: null }),
 
   // Total soil height currently filled (sum of layer thicknesses).
   filledHeight: () => get().layers.reduce((h, l) => h + l.thickness, 0),
@@ -89,3 +98,8 @@ export const useStore = create((set, get) => ({
       return { customItems: next }
     }),
 }))
+
+// Dev-only hook so automated QA can drive the store from the page console.
+if (typeof window !== 'undefined' && import.meta.env?.DEV) {
+  window.__ecobloom = useStore
+}

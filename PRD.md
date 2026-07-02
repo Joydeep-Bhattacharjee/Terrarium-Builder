@@ -1,4 +1,4 @@
-# 📋 Product Requirements Document — Virtual Terrarium Builder
+# 📋 Product Requirements Document — EcoBloom Terra-Space
 
 **Version:** 1.0
 **Status:** Implemented (v0.1.0)

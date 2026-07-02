@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useThree, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import {
   OrbitControls,
@@ -11,6 +12,27 @@ import SubstrateLayer from './SubstrateLayer.jsx'
 import Decorations from './Decorations.jsx'
 import { useStore } from '../store/useStore.js'
 import { JAR, DECORATIONS } from '../data/inventory.js'
+
+// Processes a drag-and-drop from the sidebar: raycasts the drop point onto the
+// soil surface and places the item there.
+function DropHandler({ onPlace }) {
+  const { camera, scene } = useThree()
+  const ray = new THREE.Raycaster()
+  const v = new THREE.Vector2()
+
+  useFrame(() => {
+    const req = useStore.getState().dropRequest
+    if (!req) return
+    useStore.getState().clearDrop()
+    v.set(req.ndc[0], req.ndc[1])
+    ray.setFromCamera(v, camera)
+    const hits = ray.intersectObjects(scene.children, true)
+    const hit = hits.find((h) => h.object.userData?.placeable)
+    if (hit) onPlace(hit.point, hit.face?.normal, req.itemId)
+  })
+
+  return null
+}
 
 export default function Scene() {
   const layers = useStore((s) => s.layers)
@@ -25,8 +47,8 @@ export default function Scene() {
   )
 
   const place = useCallback(
-    (point, normal) => {
-      const def = resolveItem(selectedItem)
+    (point, normal, itemId) => {
+      const def = resolveItem(itemId || selectedItem)
       if (!def) return
       // keep items off the glass — clamp inside a safe circle
       const maxR = JAR.innerRadius * 0.88
@@ -68,8 +90,8 @@ export default function Scene() {
 
   return (
     <>
-      <color attach="background" args={['#20191420']} />
-      <fog attach="fog" args={['#1c1611', 9, 22]} />
+      <color attach="background" args={['#efe7d9']} />
+      <fog attach="fog" args={['#efe7d9', 13, 30]} />
 
       {/* Key / fill / rim lighting for warm, premium look */}
       <ambientLight intensity={0.35} />
@@ -94,19 +116,19 @@ export default function Scene() {
         <Lightformer intensity={1.2} position={[0, -3, 2]} scale={[8, 3, 1]} color="#d9c6a5" />
       </Environment>
 
-      {/* Table surface + soft contact shadow */}
+      {/* Light warm stone table + soft contact shadow */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1.82, 0]} receiveShadow>
         <circleGeometry args={[8, 64]} />
-        <meshStandardMaterial color="#3a2c22" roughness={0.9} metalness={0} />
+        <meshStandardMaterial color="#ddd1bd" roughness={0.85} metalness={0} />
       </mesh>
       <ContactShadows
         position={[0, -1.79, 0]}
-        opacity={0.55}
+        opacity={0.4}
         scale={9}
-        blur={2.6}
+        blur={2.8}
         far={4}
         resolution={1024}
-        color="#140d08"
+        color="#5a4636"
       />
 
       {/* Soil layers */}
@@ -121,6 +143,9 @@ export default function Scene() {
       ))}
 
       <Decorations />
+
+      {/* Handles drag-and-drop placement from the sidebar */}
+      <DropHandler onPlace={place} />
 
       {/* Glass jar drawn last for correct transmission over contents */}
       <Jar />
