@@ -3,6 +3,9 @@ import Moss from './Moss.jsx'
 import Fittonia from './Fittonia.jsx'
 import Fern from './Fern.jsx'
 import Mushroom from './Mushroom.jsx'
+import Echeveria from './Echeveria.jsx'
+import Cactus from './Cactus.jsx'
+import Haworthia from './Haworthia.jsx'
 import DragonStone from './DragonStone.jsx'
 import SeaShell from './SeaShell.jsx'
 import GlbModel from './GlbModel.jsx'
@@ -10,6 +13,12 @@ import GlbModel from './GlbModel.jsx'
 // Renders the right procedural model (or a custom GLB) for a decoration kind.
 export default function ModelDispatch({ kind, variant, url, seed }) {
   switch (kind) {
+    case 'echeveria':
+      return <Echeveria seed={seed} variant={variant} />
+    case 'cactus':
+      return <Cactus seed={seed} />
+    case 'haworthia':
+      return <Haworthia seed={seed} />
     case 'moss':
       return <Moss seed={seed} />
     case 'fittonia':

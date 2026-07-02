@@ -9,30 +9,32 @@ function useJarGeometry() {
     const p = []
     const v = (r, y) => p.push(new THREE.Vector2(r, y))
 
-    const outerR = 1.28
-    const innerR = 1.21
-    const rimR = 1.15
-    const yBottom = -1.78
-    const yInnerFloor = -1.55
-    const yRim = 1.5
+    // Rounded fishbowl: flattish base -> bulging belly -> incurved rim.
+    // Closed cross-section (outer up-and-over, inner down) => real glass wall.
+    // outer profile: base center -> out -> belly -> rim
+    v(0.0, -1.52)
+    v(0.68, -1.52)
+    v(1.05, -1.4)
+    v(1.36, -1.06)
+    v(1.5, -0.42) // belly (widest)
+    v(1.5, -0.12)
+    v(1.42, 0.42)
+    v(1.28, 0.86)
+    v(1.2, 1.12)
+    v(1.22, 1.2) // rim top outer
+    // rim + inner profile back down to inner base center
+    v(1.12, 1.2) // rim top inner
+    v(1.12, 1.08)
+    v(1.2, 0.82)
+    v(1.34, 0.4)
+    v(1.42, -0.12)
+    v(1.42, -0.42) // inner belly
+    v(1.28, -1.02)
+    v(0.98, -1.34)
+    v(0.6, -1.4) // inner base
+    v(0.0, -1.4)
 
-    // outer floor -> outer wall -> rim -> inner wall -> inner floor
-    v(0.0, yBottom)
-    v(0.95, yBottom)
-    v(1.15, yBottom + 0.04)
-    v(outerR, yBottom + 0.2) // rounded outer corner
-    v(outerR, yRim - 0.18)
-    v(outerR, yRim - 0.02)
-    v(outerR - 0.02, yRim) // rim top outer
-    v(rimR + 0.02, yRim) // rim top inner
-    v(rimR, yRim - 0.03)
-    v(innerR, yRim - 0.2)
-    v(innerR, yInnerFloor + 0.22)
-    v(1.02, yInnerFloor + 0.03) // rounded inner corner
-    v(0.9, yInnerFloor)
-    v(0.0, yInnerFloor)
-
-    const geo = new THREE.LatheGeometry(p, 96)
+    const geo = new THREE.LatheGeometry(p, 128)
     geo.computeVertexNormals()
     return geo
   }, [])

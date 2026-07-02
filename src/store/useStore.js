@@ -49,7 +49,7 @@ export const useStore = create((set, get) => ({
     const mat = SUBSTRATES.find((m) => m.id === materialId)
     if (!mat) return
     // stop when nearly full
-    if (get().filledHeight() > JAR.height * 0.62) return
+    if (get().filledHeight() > JAR.fillMax) return
     const baseY = JAR.floorY + get().filledHeight()
     set((s) => ({
       layers: [
